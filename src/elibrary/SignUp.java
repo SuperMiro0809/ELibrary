@@ -289,7 +289,7 @@ public class SignUp extends javax.swing.JFrame {
     }//GEN-LAST:event_jLabel6MouseMoved
 
     private void jLabel6MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel6MousePressed
-        SignUp object=new SignUp();
+        Login object=new Login();
         
         object.setVisible(true);
         
