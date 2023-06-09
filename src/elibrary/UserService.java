@@ -5,8 +5,13 @@
 package elibrary;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 
 /**
  *
@@ -20,8 +25,10 @@ public class UserService {
             String line;
             while ((line = reader.readLine()) != null) {
                 String[] parts = line.split(":");
-                if (parts.length == 2 && parts[0].equals(username) && parts[1].equals(password)) {
-                    return true;
+                if (parts.length == 2 && parts[0].equals(username)) {
+                    String storedPassword = parts[1];
+                    String hashedPassword = hashPassword(password);
+                    return storedPassword.equals(hashedPassword);
                 }
             }
         } catch (IOException e) {
@@ -31,6 +38,28 @@ public class UserService {
     }
     
     public void register(String username, String password) {
-        
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(USERS_FILE, true))) {
+            String hashedPassword = hashPassword(password);
+            String userRecord = username + ":" + hashedPassword;
+            writer.write(userRecord);
+            writer.newLine();
+        } catch (IOException e) {
+          e.printStackTrace();
+        }
+    }
+    
+    private String hashPassword(String password) {
+        try {
+            MessageDigest digest = MessageDigest.getInstance("SHA-256");
+            byte[] hashedBytes = digest.digest(password.getBytes(StandardCharsets.UTF_8));
+            StringBuilder stringBuilder = new StringBuilder();
+            for (byte hashedByte : hashedBytes) {
+                stringBuilder.append(String.format("%02x", hashedByte));
+            }
+            return stringBuilder.toString();
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 }
