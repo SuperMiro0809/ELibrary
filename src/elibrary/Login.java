@@ -285,7 +285,7 @@ public class Login extends javax.swing.JFrame {
     }//GEN-LAST:event_SignUpLabelMousePressed
 
     private void LoginButtonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_LoginButtonMousePressed
-
+        UserService userService = new UserService();
         String username = UsernameField.getText();
         String password = String.valueOf(PasswordField.getPassword());
         
@@ -296,9 +296,14 @@ public class Login extends javax.swing.JFrame {
             ErrorMessage.setText("Password is required!");
         }else {
             ErrorMessage.setText("");
-            JOptionPane.showMessageDialog(null, password);
             
-            //Incorrect username or password!
+            boolean res = userService.authenticate(username, password);
+            
+            if(res) {
+                JOptionPane.showMessageDialog(null, "Success");
+            }else {
+                ErrorMessage.setText("Incorrect username or password!");
+            }
         }
         
     }//GEN-LAST:event_LoginButtonMousePressed
@@ -337,7 +342,7 @@ public class Login extends javax.swing.JFrame {
             }
         });
     }
-
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel ErrorMessage;
     private javax.swing.JLabel HeaderLabel;
