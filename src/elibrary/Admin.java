@@ -10,11 +10,14 @@ package elibrary;
  */
 public class Admin extends javax.swing.JFrame {
 
-    /**
-     * Creates new form Admin
-     */
-    public Admin() {
+    /* 
+    *@param user;
+    */
+    public Admin(UserState user) {
         initComponents();
+        if(user != null) {
+            AdminName.setText(user.getUsername());
+        }
     }
 
     /**
@@ -50,7 +53,7 @@ public class Admin extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jPanel1.setBackground(new java.awt.Color(250, 238, 175));
+        jPanel1.setBackground(new java.awt.Color(71, 70, 62));
         jPanel1.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(71, 70, 62), 3, true));
 
         jPanel2.setBackground(new java.awt.Color(250, 238, 175));
@@ -151,17 +154,17 @@ public class Admin extends javax.swing.JFrame {
         SectionTable.setForeground(new java.awt.Color(97, 95, 84));
         SectionTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
             },
             new String [] {
-                "Autor", "Book", "Category", "ID"
+                "Autor", "Book", "Category", "ID", "Operation"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false
+                false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -321,10 +324,10 @@ public class Admin extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Admin().setVisible(true);
+                new Admin(null).setVisible(true);
             }
         });
-    }
+    } 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel AddBookLabel;

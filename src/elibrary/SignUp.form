@@ -130,6 +130,9 @@
             </Property>
             <Property name="text" type="java.lang.String" value="Register"/>
           </Properties>
+          <Events>
+            <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="RegisterButtonMousePressed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="Message">
           <Properties>
@@ -254,7 +257,6 @@
                 <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="0" green="0" red="ff" type="rgb"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Incorrect username or password!"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JPasswordField" name="PasswordFieldRepeat">

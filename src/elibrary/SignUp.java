@@ -7,6 +7,7 @@ package elibrary;
 import java.awt.Font;
 import java.awt.font.TextAttribute;
 import java.util.Map;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -55,6 +56,11 @@ public class SignUp extends javax.swing.JFrame {
         RegisterButton.setFont(new java.awt.Font("Eras Medium ITC", 0, 16)); // NOI18N
         RegisterButton.setForeground(new java.awt.Color(227, 223, 197));
         RegisterButton.setText("Register");
+        RegisterButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                RegisterButtonMousePressed(evt);
+            }
+        });
 
         Message.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         Message.setForeground(new java.awt.Color(102, 87, 11));
@@ -81,7 +87,6 @@ public class SignUp extends javax.swing.JFrame {
 
         ErrorMessage.setFont(new java.awt.Font("Eras Medium ITC", 0, 14)); // NOI18N
         ErrorMessage.setForeground(new java.awt.Color(255, 0, 0));
-        ErrorMessage.setText("Incorrect username or password!");
 
         PasswordFieldRepeat.setBackground(new java.awt.Color(227, 223, 197));
         PasswordFieldRepeat.setFont(new java.awt.Font("Nirmala UI", 0, 14)); // NOI18N
@@ -305,6 +310,36 @@ public class SignUp extends javax.swing.JFrame {
     private void PasswordFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PasswordFieldActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_PasswordFieldActionPerformed
+
+    private void RegisterButtonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_RegisterButtonMousePressed
+        String username = UsernameField.getText();
+        String password = new String(PasswordField.getPassword());
+        String repeatPassword = new String(PasswordFieldRepeat.getPassword());
+        
+        if(username.isBlank()) {
+            ErrorMessage.setText("Username is required!");
+        }else if(password.isBlank()) {
+            ErrorMessage.setText("Password is required!");
+        }else if(!repeatPassword.equals(password)) {
+            ErrorMessage.setText("Passwords don't match!");
+        }else {
+            ErrorMessage.setText("");
+            
+            UserService userService = new UserService();
+            
+            boolean res = userService.register(username, password);
+            
+            if(res) {
+                User object=new User(null);
+        
+                object.setVisible(true);
+        
+                dispose();
+            }else {
+                ErrorMessage.setText("Error!");
+            }
+        }
+    }//GEN-LAST:event_RegisterButtonMousePressed
 
     /**
      * @param args the command line arguments

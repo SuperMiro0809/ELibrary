@@ -297,10 +297,23 @@ public class Login extends javax.swing.JFrame {
         }else {
             ErrorMessage.setText("");
             
-            boolean res = userService.authenticate(username, password);
+            UserState user = userService.authenticate(username, password);
             
-            if(res) {
-                JOptionPane.showMessageDialog(null, "Success");
+            if(user != null) {
+                String role = user.getRole();
+                if(role.equals("Admin")) {
+                    Admin object=new Admin(user);
+        
+                    object.setVisible(true);
+
+                    dispose();
+                }else {
+                    User object=new User(user);
+        
+                    object.setVisible(true);
+
+                    dispose();
+                }
             }else {
                 ErrorMessage.setText("Incorrect username or password!");
             }
