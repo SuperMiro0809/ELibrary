@@ -53,7 +53,7 @@ public class Admin extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jPanel1.setBackground(new java.awt.Color(71, 70, 62));
+        jPanel1.setBackground(new java.awt.Color(97, 95, 84));
         jPanel1.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(71, 70, 62), 3, true));
 
         jPanel2.setBackground(new java.awt.Color(250, 238, 175));
@@ -142,7 +142,7 @@ public class Admin extends javax.swing.JFrame {
 
         AddBookLabel.setFont(new java.awt.Font("Eras Medium ITC", 1, 18)); // NOI18N
         AddBookLabel.setForeground(new java.awt.Color(102, 87, 11));
-        AddBookLabel.setText("Add book:");
+        AddBookLabel.setText("Add a book:");
 
         SectionHeader.setFont(new java.awt.Font("Eras Medium ITC", 1, 18)); // NOI18N
         SectionHeader.setForeground(new java.awt.Color(102, 87, 11));
@@ -160,7 +160,7 @@ public class Admin extends javax.swing.JFrame {
                 {null, null, null, null, null}
             },
             new String [] {
-                "Autor", "Book", "Category", "ID", "Operation"
+                "ID", "Book name", "Category", "Autor", "Operation"
             }
         ) {
             boolean[] canEdit = new boolean [] {

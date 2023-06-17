@@ -36,7 +36,7 @@
     <Container class="javax.swing.JPanel" name="jPanel1">
       <Properties>
         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-          <Color blue="3e" green="46" red="47" type="rgb"/>
+          <Color blue="54" green="5f" red="61" type="rgb"/>
         </Property>
         <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
           <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
@@ -395,7 +395,7 @@
                 <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="b" green="57" red="66" type="rgb"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Add book:"/>
+                <Property name="text" type="java.lang.String" value="Add a book:"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="SectionHeader">
@@ -436,10 +436,10 @@
                     </Property>
                     <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
                       <Table columnCount="5" rowCount="4">
-                        <Column editable="false" title="Autor" type="java.lang.Object"/>
-                        <Column editable="false" title="Book" type="java.lang.Object"/>
-                        <Column editable="false" title="Category" type="java.lang.Object"/>
                         <Column editable="false" title="ID" type="java.lang.Object"/>
+                        <Column editable="false" title="Book name" type="java.lang.Object"/>
+                        <Column editable="false" title="Category" type="java.lang.Object"/>
+                        <Column editable="false" title="Autor" type="java.lang.Object"/>
                         <Column editable="false" title="Operation" type="java.lang.Object"/>
                       </Table>
                     </Property>
