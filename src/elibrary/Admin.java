@@ -199,7 +199,7 @@ public class Admin extends javax.swing.JFrame {
 
         ErrorMessage.setFont(new java.awt.Font("Eras Medium ITC", 1, 18)); // NOI18N
         ErrorMessage.setForeground(new java.awt.Color(255, 0, 0));
-        ErrorMessage.setText("This book is already in the section!");
+        ErrorMessage.setSize(new java.awt.Dimension(327, 22));
 
         AddButton.setBackground(new java.awt.Color(97, 95, 84));
         AddButton.setFont(new java.awt.Font("Eras Medium ITC", 0, 18)); // NOI18N
@@ -236,7 +236,7 @@ public class Admin extends javax.swing.JFrame {
                             .addComponent(SectionScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 525, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                 .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel3Layout.createSequentialGroup()
-                                    .addComponent(ErrorMessage)
+                                    .addComponent(ErrorMessage, javax.swing.GroupLayout.PREFERRED_SIZE, 327, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(AddButton))
                                 .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel3Layout.createSequentialGroup()
@@ -273,7 +273,7 @@ public class Admin extends javax.swing.JFrame {
                             .addComponent(AuthorLabel)
                             .addComponent(AuthorField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(44, 44, 44)
-                        .addComponent(ErrorMessage))
+                        .addComponent(ErrorMessage, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(AddButton)))

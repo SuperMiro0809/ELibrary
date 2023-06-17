@@ -130,7 +130,7 @@ public class SignUp extends javax.swing.JFrame {
                             .addComponent(PasswordFieldRepeat)))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGap(44, 44, 44)
-                        .addComponent(ErrorMessage)))
+                        .addComponent(ErrorMessage, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
@@ -152,7 +152,7 @@ public class SignUp extends javax.swing.JFrame {
                         .addGap(27, 27, 27)
                         .addComponent(PasswordFieldRepeat, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 41, Short.MAX_VALUE)
-                .addComponent(ErrorMessage)
+                .addComponent(ErrorMessage, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
