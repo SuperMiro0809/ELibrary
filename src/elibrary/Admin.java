@@ -4,7 +4,11 @@
  */
 package elibrary;
 
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 
 /**
@@ -21,6 +25,8 @@ public class Admin extends javax.swing.JFrame {
         if(user != null) {
             AdminName.setText(user.getUsername());
         }
+        
+        loadBooks();
     }
 
     /**
@@ -42,10 +48,10 @@ public class Admin extends javax.swing.JFrame {
         IDLabel = new javax.swing.JLabel();
         CategoryLabel = new javax.swing.JLabel();
         BookNameLabel = new javax.swing.JLabel();
-        AutorLabel = new javax.swing.JLabel();
-        IDField = new javax.swing.JTextField();
+        AuthorLabel = new javax.swing.JLabel();
+        URLField = new javax.swing.JTextField();
         BookNameField = new javax.swing.JTextField();
-        AutorField = new javax.swing.JTextField();
+        AuthorField = new javax.swing.JTextField();
         CategoryBox = new javax.swing.JComboBox<>();
         AddBookLabel = new javax.swing.JLabel();
         SectionHeader = new javax.swing.JLabel();
@@ -69,8 +75,6 @@ public class Admin extends javax.swing.JFrame {
         HeaderLabel.setFont(new java.awt.Font("Vladimir Script", 1, 60)); // NOI18N
         HeaderLabel.setForeground(new java.awt.Color(71, 70, 62));
         HeaderLabel.setText("E-Library");
-
-        LogoLabel.setIcon(new javax.swing.ImageIcon("C:\\Users\\aneli\\OneDrive\\Desktop\\minlogo.png")); // NOI18N
 
         AdminName.setFont(new java.awt.Font("Eras Medium ITC", 0, 24)); // NOI18N
         AdminName.setForeground(new java.awt.Color(102, 87, 11));
@@ -112,7 +116,7 @@ public class Admin extends javax.swing.JFrame {
 
         IDLabel.setFont(new java.awt.Font("Nirmala UI", 1, 13)); // NOI18N
         IDLabel.setForeground(new java.awt.Color(97, 95, 84));
-        IDLabel.setText("ID");
+        IDLabel.setText("URL");
 
         CategoryLabel.setFont(new java.awt.Font("Nirmala UI", 1, 13)); // NOI18N
         CategoryLabel.setForeground(new java.awt.Color(97, 95, 84));
@@ -122,13 +126,13 @@ public class Admin extends javax.swing.JFrame {
         BookNameLabel.setForeground(new java.awt.Color(97, 95, 84));
         BookNameLabel.setText("Book name");
 
-        AutorLabel.setFont(new java.awt.Font("Nirmala UI", 1, 13)); // NOI18N
-        AutorLabel.setForeground(new java.awt.Color(97, 95, 84));
-        AutorLabel.setText("Autor");
+        AuthorLabel.setFont(new java.awt.Font("Nirmala UI", 1, 13)); // NOI18N
+        AuthorLabel.setForeground(new java.awt.Color(97, 95, 84));
+        AuthorLabel.setText("Author");
 
-        IDField.setBackground(new java.awt.Color(227, 223, 197));
-        IDField.setFont(new java.awt.Font("Nirmala UI", 0, 13)); // NOI18N
-        IDField.setForeground(new java.awt.Color(102, 87, 11));
+        URLField.setBackground(new java.awt.Color(227, 223, 197));
+        URLField.setFont(new java.awt.Font("Nirmala UI", 0, 13)); // NOI18N
+        URLField.setForeground(new java.awt.Color(102, 87, 11));
 
         BookNameField.setBackground(new java.awt.Color(227, 223, 197));
         BookNameField.setFont(new java.awt.Font("Nirmala UI", 0, 13)); // NOI18N
@@ -139,9 +143,9 @@ public class Admin extends javax.swing.JFrame {
             }
         });
 
-        AutorField.setBackground(new java.awt.Color(227, 223, 197));
-        AutorField.setFont(new java.awt.Font("Nirmala UI", 0, 13)); // NOI18N
-        AutorField.setForeground(new java.awt.Color(102, 87, 11));
+        AuthorField.setBackground(new java.awt.Color(227, 223, 197));
+        AuthorField.setFont(new java.awt.Font("Nirmala UI", 0, 13)); // NOI18N
+        AuthorField.setForeground(new java.awt.Color(102, 87, 11));
 
         CategoryBox.setBackground(new java.awt.Color(227, 223, 197));
         CategoryBox.setFont(new java.awt.Font("Nirmala UI", 0, 13)); // NOI18N
@@ -201,6 +205,11 @@ public class Admin extends javax.swing.JFrame {
         AddButton.setFont(new java.awt.Font("Eras Medium ITC", 0, 18)); // NOI18N
         AddButton.setForeground(new java.awt.Color(227, 223, 197));
         AddButton.setText("Add ");
+        AddButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                AddButtonMousePressed(evt);
+            }
+        });
         AddButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 AddButtonActionPerformed(evt);
@@ -232,15 +241,15 @@ public class Admin extends javax.swing.JFrame {
                                     .addComponent(AddButton))
                                 .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel3Layout.createSequentialGroup()
                                     .addComponent(IDLabel)
-                                    .addGap(49, 49, 49)
-                                    .addComponent(IDField, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGap(95, 95, 95)
+                                    .addGap(40, 40, 40)
+                                    .addComponent(URLField, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGap(97, 97, 97)
                                     .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                         .addComponent(BookNameLabel)
-                                        .addComponent(AutorLabel))
+                                        .addComponent(AuthorLabel))
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                     .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(AutorField, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(AuthorField, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addComponent(BookNameField, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                         .addGap(0, 26, Short.MAX_VALUE))))
         );
@@ -254,15 +263,15 @@ public class Admin extends javax.swing.JFrame {
                         .addGap(29, 29, 29)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(IDLabel)
-                            .addComponent(IDField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(URLField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(BookNameLabel)
                             .addComponent(BookNameField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(CategoryLabel)
                             .addComponent(CategoryBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(AutorLabel)
-                            .addComponent(AutorField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(AuthorLabel)
+                            .addComponent(AuthorField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(44, 44, 44)
                         .addComponent(ErrorMessage))
                     .addGroup(jPanel3Layout.createSequentialGroup()
@@ -318,7 +327,7 @@ public class Admin extends javax.swing.JFrame {
         int index=SectionTable.getSelectedRow();
         TableModel model=SectionTable.getModel();
         
-        String id=(String) model.getValueAt(index, 0);
+        Integer id=(Integer) model.getValueAt(index, 0);
         String bookName=(String) model.getValueAt(index, 1);
         String category=(String) model.getValueAt(index, 2);
         String autor=(String) model.getValueAt(index, 3);
@@ -340,6 +349,53 @@ public class Admin extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_BookNameFieldActionPerformed
 
+    private void AddButtonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_AddButtonMousePressed
+        String url = URLField.getText();
+        String name = BookNameField.getText();
+        String category = CategoryBox.getSelectedItem().toString();
+        String author = AuthorField.getText();
+        
+        if(url.isBlank()) {
+            ErrorMessage.setText("URL is required!");
+        }else if(name.isBlank()) {
+            ErrorMessage.setText("Book name is required!");
+        }else if(author.isBlank()) {
+            ErrorMessage.setText("Author is required!");
+        }else {
+            ErrorMessage.setText("");
+            
+            BookService bookService = new BookService();
+            
+            boolean res = bookService.createBook(url, name, category, author);
+            
+            if(res) {
+                //success
+            }else {
+                ErrorMessage.setText("Error!");
+            }
+        }
+    }//GEN-LAST:event_AddButtonMousePressed
+    
+    private void loadBooks() {
+        BookService bookService = new BookService();
+        
+        ArrayList<Book> bookArr = bookService.getBooks();
+        
+        DefaultTableModel tableModel = new DefaultTableModel(new Object[]{"ID", "Book name", "Category", "Author"}, 0) {
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                // Make all cells uneditable
+                return false;
+            }
+        };
+        
+        for(Book book : bookArr) {
+            Object[] rowData = {book.getId(), book.getName(), book.getCategory(), book.getAuthor()};
+            tableModel.addRow(rowData);
+        }
+        
+        SectionTable.setModel(tableModel);
+    }
     /**
      * @param args the command line arguments
      */
@@ -379,21 +435,21 @@ public class Admin extends javax.swing.JFrame {
     private javax.swing.JLabel AddBookLabel;
     private javax.swing.JButton AddButton;
     private javax.swing.JLabel AdminName;
-    private javax.swing.JTextField AutorField;
-    private javax.swing.JLabel AutorLabel;
+    private javax.swing.JTextField AuthorField;
+    private javax.swing.JLabel AuthorLabel;
     private javax.swing.JTextField BookNameField;
     private javax.swing.JLabel BookNameLabel;
     private javax.swing.JComboBox<String> CategoryBox;
     private javax.swing.JLabel CategoryLabel;
     private javax.swing.JLabel ErrorMessage;
     private javax.swing.JLabel HeaderLabel;
-    private javax.swing.JTextField IDField;
     private javax.swing.JLabel IDLabel;
     private javax.swing.JLabel LogoLabel;
     private javax.swing.JLabel RoleLabel;
     private javax.swing.JLabel SectionHeader;
     private javax.swing.JScrollPane SectionScrollPane;
     private javax.swing.JTable SectionTable;
+    private javax.swing.JTextField URLField;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;

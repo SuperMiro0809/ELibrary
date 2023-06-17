@@ -151,11 +151,6 @@
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="LogoLabel">
-              <Properties>
-                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="2" name="C:\Users\aneli\OneDrive\Desktop\minlogo.png"/>
-                </Property>
-              </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="AdminName">
               <Properties>
@@ -210,16 +205,16 @@
                                       </Group>
                                       <Group type="102" alignment="0" attributes="0">
                                           <Component id="IDLabel" min="-2" max="-2" attributes="0"/>
-                                          <EmptySpace min="-2" pref="49" max="-2" attributes="0"/>
-                                          <Component id="IDField" min="-2" pref="144" max="-2" attributes="0"/>
-                                          <EmptySpace min="-2" pref="95" max="-2" attributes="0"/>
+                                          <EmptySpace min="-2" pref="40" max="-2" attributes="0"/>
+                                          <Component id="URLField" min="-2" pref="151" max="-2" attributes="0"/>
+                                          <EmptySpace min="-2" pref="97" max="-2" attributes="0"/>
                                           <Group type="103" groupAlignment="0" attributes="0">
                                               <Component id="BookNameLabel" alignment="0" min="-2" max="-2" attributes="0"/>
-                                              <Component id="AutorLabel" alignment="0" min="-2" max="-2" attributes="0"/>
+                                              <Component id="AuthorLabel" alignment="0" min="-2" max="-2" attributes="0"/>
                                           </Group>
                                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
                                           <Group type="103" groupAlignment="0" attributes="0">
-                                              <Component id="AutorField" min="-2" pref="129" max="-2" attributes="0"/>
+                                              <Component id="AuthorField" min="-2" pref="129" max="-2" attributes="0"/>
                                               <Component id="BookNameField" min="-2" pref="129" max="-2" attributes="0"/>
                                           </Group>
                                       </Group>
@@ -241,7 +236,7 @@
                               <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="3" attributes="0">
                                   <Component id="IDLabel" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="IDField" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="URLField" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="BookNameLabel" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="BookNameField" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
@@ -249,8 +244,8 @@
                               <Group type="103" groupAlignment="3" attributes="0">
                                   <Component id="CategoryLabel" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="CategoryBox" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="AutorLabel" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="AutorField" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="AuthorLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="AuthorField" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace min="-2" pref="44" max="-2" attributes="0"/>
                               <Component id="ErrorMessage" min="-2" max="-2" attributes="0"/>
@@ -278,7 +273,7 @@
                 <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="54" green="5f" red="61" type="rgb"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="ID"/>
+                <Property name="text" type="java.lang.String" value="URL"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="CategoryLabel">
@@ -303,7 +298,7 @@
                 <Property name="text" type="java.lang.String" value="Book name"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="AutorLabel">
+            <Component class="javax.swing.JLabel" name="AuthorLabel">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Nirmala UI" size="13" style="1"/>
@@ -311,10 +306,10 @@
                 <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="54" green="5f" red="61" type="rgb"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Autor"/>
+                <Property name="text" type="java.lang.String" value="Author"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JTextField" name="IDField">
+            <Component class="javax.swing.JTextField" name="URLField">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="c5" green="df" red="e3" type="rgb"/>
@@ -343,7 +338,7 @@
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BookNameFieldActionPerformed"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JTextField" name="AutorField">
+            <Component class="javax.swing.JTextField" name="AuthorField">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="c5" green="df" red="e3" type="rgb"/>
@@ -478,6 +473,7 @@
                 <Property name="text" type="java.lang.String" value="Add "/>
               </Properties>
               <Events>
+                <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="AddButtonMousePressed"/>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="AddButtonActionPerformed"/>
               </Events>
             </Component>
