@@ -181,7 +181,7 @@ public class SignUp extends javax.swing.JFrame {
         HeaderLabel.setForeground(new java.awt.Color(71, 70, 62));
         HeaderLabel.setText("E-Library");
 
-        LogoLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/elibrary/logo.png"))); // NOI18N
+        LogoLabel.setIcon(new javax.swing.ImageIcon("/images/logo.png"));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -329,10 +329,10 @@ public class SignUp extends javax.swing.JFrame {
             
             UserService userService = new UserService();
             
-            boolean res = userService.register(username, password);
+            UserState user = userService.register(username, password);
             
-            if(res) {
-                User object=new User(null);
+            if(user != null) {
+                User object = new User(user);
         
                 object.setVisible(true);
         
