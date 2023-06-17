@@ -9,9 +9,18 @@ package elibrary;
  * @author aneli
  */
 public class UserState {
+    private int id;
     private String username;
     private String role;
 
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+    
     public String getUsername() {
         return username;
     }
@@ -28,7 +37,8 @@ public class UserState {
         this.role = role;
     }
 
-    public UserState(String username, String role) {
+    public UserState(int id, String username, String role) {
+        this.id = id;
         this.username = username;
         this.role = role;
     }
