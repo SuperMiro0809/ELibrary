@@ -369,7 +369,11 @@ public class Admin extends javax.swing.JFrame {
             boolean res = bookService.createBook(url, name, category, author);
             
             if(res) {
-                //success
+                loadBooks(); //load books on success
+                URLField.setText("");
+                BookNameField.setText("");
+                CategoryBox.setSelectedIndex(0);
+                AuthorField.setText("");
             }else {
                 ErrorMessage.setText("Error!");
             }
@@ -388,6 +392,8 @@ public class Admin extends javax.swing.JFrame {
                 return false;
             }
         };
+        
+        tableModel.setRowCount(0);
         
         for(Book book : bookArr) {
             Object[] rowData = {book.getId(), book.getName(), book.getCategory(), book.getAuthor()};
