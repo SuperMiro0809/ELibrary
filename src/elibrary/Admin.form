@@ -80,7 +80,7 @@
             </Property>
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
               <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
-                <LineBorder roundedCorners="true">
+                <LineBorder>
                   <Color PropertyName="color" blue="3e" green="46" red="47" type="rgb"/>
                 </LineBorder>
               </Border>
@@ -176,7 +176,7 @@
             </Property>
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
               <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
-                <LineBorder roundedCorners="true">
+                <LineBorder>
                   <Color PropertyName="color" blue="3e" green="46" red="47" type="rgb"/>
                 </LineBorder>
               </Border>
@@ -339,6 +339,9 @@
                   <Color blue="b" green="57" red="66" type="rgb"/>
                 </Property>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BookNameFieldActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JTextField" name="AutorField">
               <Properties>
@@ -436,14 +439,17 @@
                     </Property>
                     <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
                       <Table columnCount="5" rowCount="4">
-                        <Column editable="false" title="ID" type="java.lang.Object"/>
-                        <Column editable="false" title="Book name" type="java.lang.Object"/>
-                        <Column editable="false" title="Category" type="java.lang.Object"/>
-                        <Column editable="false" title="Autor" type="java.lang.Object"/>
-                        <Column editable="false" title="Operation" type="java.lang.Object"/>
+                        <Column editable="false" title="ID" type="java.lang.String"/>
+                        <Column editable="false" title="Book name" type="java.lang.String"/>
+                        <Column editable="false" title="Category" type="java.lang.String"/>
+                        <Column editable="false" title="Autor" type="java.lang.String"/>
+                        <Column editable="false" title="Operation" type="java.lang.String"/>
                       </Table>
                     </Property>
                   </Properties>
+                  <Events>
+                    <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="SectionTableMouseClicked"/>
+                  </Events>
                 </Component>
               </SubComponents>
             </Container>

@@ -51,6 +51,7 @@ public class SignUp extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jPanel1.setBackground(new java.awt.Color(250, 238, 175));
+        jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(71, 70, 62), 2));
 
         RegisterButton.setBackground(new java.awt.Color(97, 95, 84));
         RegisterButton.setFont(new java.awt.Font("Eras Medium ITC", 0, 16)); // NOI18N
@@ -231,6 +232,7 @@ public class SignUp extends javax.swing.JFrame {
         );
 
         jPanel2.setBackground(new java.awt.Color(97, 95, 84));
+        jPanel2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(71, 70, 62), 3));
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -250,7 +252,7 @@ public class SignUp extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(47, 47, 47)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(55, Short.MAX_VALUE))
+                .addContainerGap(57, Short.MAX_VALUE))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );

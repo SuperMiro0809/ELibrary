@@ -4,6 +4,9 @@
  */
 package elibrary;
 
+import javax.swing.JOptionPane;
+import javax.swing.table.TableModel;
+
 /**
  *
  * @author aneli
@@ -60,7 +63,7 @@ public class User extends javax.swing.JFrame {
         jPanel1.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(71, 70, 62), 3, true));
 
         jPanel2.setBackground(new java.awt.Color(250, 238, 175));
-        jPanel2.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(71, 70, 62), 1, true));
+        jPanel2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(71, 70, 62)));
 
         RoleLabel.setFont(new java.awt.Font("Eras Medium ITC", 0, 24)); // NOI18N
         RoleLabel.setForeground(new java.awt.Color(102, 87, 11));
@@ -108,7 +111,7 @@ public class User extends javax.swing.JFrame {
         );
 
         jPanel3.setBackground(new java.awt.Color(250, 238, 175));
-        jPanel3.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(71, 70, 62), 1, true));
+        jPanel3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(71, 70, 62)));
 
         IDLabel.setFont(new java.awt.Font("Nirmala UI", 1, 13)); // NOI18N
         IDLabel.setForeground(new java.awt.Color(97, 95, 84));
@@ -149,7 +152,7 @@ public class User extends javax.swing.JFrame {
 
         SectionHeader.setFont(new java.awt.Font("Eras Medium ITC", 1, 18)); // NOI18N
         SectionHeader.setForeground(new java.awt.Color(102, 87, 11));
-        SectionHeader.setText("My section:");
+        SectionHeader.setText("MS(My section):");
 
         SectionTable.setBackground(new java.awt.Color(227, 223, 197));
         SectionTable.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(102, 87, 11), 1, true));
@@ -157,21 +160,33 @@ public class User extends javax.swing.JFrame {
         SectionTable.setForeground(new java.awt.Color(97, 95, 84));
         SectionTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
             },
             new String [] {
-                "Autor", "Book", "Category", "ID", "Read", "Remove"
+                "Autor", "Book name", "Category", "ID", "Operation"
             }
         ) {
-            boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
+            }
+        });
+        SectionTable.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                SectionTableMouseClicked(evt);
             }
         });
         SectionScrollPane.setViewportView(SectionTable);
@@ -196,21 +211,33 @@ public class User extends javax.swing.JFrame {
         SearchTable.setForeground(new java.awt.Color(97, 95, 84));
         SearchTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
             },
             new String [] {
-                "ID", "Book name", "Category", "Autor", "Read", "Add to MS"
+                "ID", "Book name", "Category", "Autor", "Operation"
             }
         ) {
-            boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
+            }
+        });
+        SearchTable.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                SearchTableMouseClicked(evt);
             }
         });
         SectionScrollPane1.setViewportView(SearchTable);
@@ -330,6 +357,51 @@ public class User extends javax.swing.JFrame {
     private void SearchButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SearchButtonActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_SearchButtonActionPerformed
+
+    private void SearchTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SearchTableMouseClicked
+        int index=SearchTable.getSelectedRow();
+        TableModel model=SearchTable.getModel();
+        
+        String id=(String) model.getValueAt(index, 0);
+        String bookName=(String) model.getValueAt(index, 1);
+        String category=(String) model.getValueAt(index, 2);
+        String autor=(String) model.getValueAt(index, 3);
+        
+        int response = JOptionPane.showConfirmDialog(this,"Are you sure you want to add to MS the book with parameters: \n ID: " + id + "\n Book name: " + bookName + "\n Category: " + category + "\n Autor: " + autor, "Confirmation of removal", JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE);
+        
+        if(response==JOptionPane.YES_OPTION){
+            //add
+        }
+        else if(response==JOptionPane.NO_OPTION){
+            System.out.println("Confirmation denied.");
+        }
+        else if(response==JOptionPane.CLOSED_OPTION){
+            System.out.println("The confirmation form has been closed.");
+        }
+    }//GEN-LAST:event_SearchTableMouseClicked
+
+    private void SectionTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SectionTableMouseClicked
+        int index=SectionTable.getSelectedRow();
+        TableModel model=SectionTable.getModel();
+        
+        String id=(String) model.getValueAt(index, 0);
+        String bookName=(String) model.getValueAt(index, 1);
+        String category=(String) model.getValueAt(index, 2);
+        String autor=(String) model.getValueAt(index, 3);
+        
+        String[] def={"Read","Remove from MS"};
+        int response = JOptionPane.showOptionDialog(null,"What do you want to do with the book with parameters: \n ID: " + id + "\n Book name: " + bookName + "\n Category: " + category + "\n Autor: " + autor, "Confirmation of action", 0,JOptionPane.QUESTION_MESSAGE,null,def,"Read");
+        
+        if(response==JOptionPane.YES_OPTION){
+            //read
+        }
+        else if(response==JOptionPane.NO_OPTION){
+            //remove
+        }
+        else if(response==JOptionPane.CLOSED_OPTION){
+            System.out.println("The confirmation form has been closed.");
+        }
+    }//GEN-LAST:event_SectionTableMouseClicked
 
     /**
      * @param args the command line arguments
