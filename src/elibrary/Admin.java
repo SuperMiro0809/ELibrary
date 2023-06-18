@@ -327,7 +327,7 @@ public class Admin extends javax.swing.JFrame {
         int index=SectionTable.getSelectedRow();
         TableModel model=SectionTable.getModel();
         
-        Integer id=(Integer) model.getValueAt(index, 0);
+        int id=(int) model.getValueAt(index, 0);
         String bookName=(String) model.getValueAt(index, 1);
         String category=(String) model.getValueAt(index, 2);
         String autor=(String) model.getValueAt(index, 3);

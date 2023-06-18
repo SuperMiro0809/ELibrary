@@ -43,6 +43,51 @@ public class BookService {
         return bookArr;
     }
     
+    public ArrayList getBooks(Book b) {
+        ArrayList<Book> bookArr = new ArrayList<Book>();
+        
+        try (BufferedReader reader = new BufferedReader(new FileReader(BOOKS_FILE))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                String[] parts = line.split("<3");
+                
+                int id = Integer.parseInt(parts[0]);
+                String url = parts[1];
+                String name = parts[2];
+                String category = parts[3];
+                String author = parts[4];
+                
+                boolean canAdd = true;
+                
+                if(b.getId() > 0 && b.getId() != id) {
+                    canAdd = false;
+                }
+                
+                if(!b.getName().isBlank() && !b.getName().matches(name)) {
+                    canAdd = false;
+                }
+                
+                if(!b.getCategory().isBlank() && !b.getCategory().matches(category)) {
+                    canAdd = false;
+                }
+                
+                if(!b.getAuthor().isBlank() && !b.getAuthor().matches(author)) {
+                    canAdd = false;
+                }
+                
+                if(canAdd) {
+                    Book book = new Book(id, url, name, category, author);
+                
+                    bookArr.add(book);
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        
+        return bookArr;
+    }
+    
     public boolean createBook(String url, String name, String category, String author) {
         int nextId = getNextId();
         

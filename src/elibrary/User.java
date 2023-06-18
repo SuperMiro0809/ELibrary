@@ -4,7 +4,9 @@
  */
 package elibrary;
 
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 
 /**
@@ -12,7 +14,7 @@ import javax.swing.table.TableModel;
  * @author aneli
  */
 public class User extends javax.swing.JFrame {
-
+    public int userId = 0;
   
     /* 
     *@param user;
@@ -21,7 +23,11 @@ public class User extends javax.swing.JFrame {
         initComponents();
         if(user != null) {
             UserName.setText(user.getUsername());
+            userId = user.getId();
         }
+        
+        loadSearchTable();
+        loadSectionTable();
     }
 
     /**
@@ -43,10 +49,10 @@ public class User extends javax.swing.JFrame {
         IDLabel = new javax.swing.JLabel();
         CategoryLabel = new javax.swing.JLabel();
         BookNameLabel = new javax.swing.JLabel();
-        AutorLabel = new javax.swing.JLabel();
+        AuthorLabel = new javax.swing.JLabel();
         IDField = new javax.swing.JTextField();
         BookNameField = new javax.swing.JTextField();
-        AutorField = new javax.swing.JTextField();
+        AuthorField = new javax.swing.JTextField();
         CategoryBox = new javax.swing.JComboBox<>();
         ResultLabel = new javax.swing.JLabel();
         SectionHeader = new javax.swing.JLabel();
@@ -72,8 +78,6 @@ public class User extends javax.swing.JFrame {
         HeaderLabel.setFont(new java.awt.Font("Vladimir Script", 1, 60)); // NOI18N
         HeaderLabel.setForeground(new java.awt.Color(71, 70, 62));
         HeaderLabel.setText("E-Library");
-
-        LogoLabel.setIcon(new javax.swing.ImageIcon("C:\\Users\\aneli\\OneDrive\\Desktop\\minlogo.png")); // NOI18N
 
         UserName.setFont(new java.awt.Font("Eras Medium ITC", 0, 24)); // NOI18N
         UserName.setForeground(new java.awt.Color(102, 87, 11));
@@ -125,9 +129,9 @@ public class User extends javax.swing.JFrame {
         BookNameLabel.setForeground(new java.awt.Color(97, 95, 84));
         BookNameLabel.setText("Book name");
 
-        AutorLabel.setFont(new java.awt.Font("Nirmala UI", 1, 13)); // NOI18N
-        AutorLabel.setForeground(new java.awt.Color(97, 95, 84));
-        AutorLabel.setText("Autor");
+        AuthorLabel.setFont(new java.awt.Font("Nirmala UI", 1, 13)); // NOI18N
+        AuthorLabel.setForeground(new java.awt.Color(97, 95, 84));
+        AuthorLabel.setText("Author");
 
         IDField.setBackground(new java.awt.Color(227, 223, 197));
         IDField.setFont(new java.awt.Font("Nirmala UI", 0, 13)); // NOI18N
@@ -137,9 +141,9 @@ public class User extends javax.swing.JFrame {
         BookNameField.setFont(new java.awt.Font("Nirmala UI", 0, 13)); // NOI18N
         BookNameField.setForeground(new java.awt.Color(102, 87, 11));
 
-        AutorField.setBackground(new java.awt.Color(227, 223, 197));
-        AutorField.setFont(new java.awt.Font("Nirmala UI", 0, 13)); // NOI18N
-        AutorField.setForeground(new java.awt.Color(102, 87, 11));
+        AuthorField.setBackground(new java.awt.Color(227, 223, 197));
+        AuthorField.setFont(new java.awt.Font("Nirmala UI", 0, 13)); // NOI18N
+        AuthorField.setForeground(new java.awt.Color(102, 87, 11));
 
         CategoryBox.setBackground(new java.awt.Color(227, 223, 197));
         CategoryBox.setFont(new java.awt.Font("Nirmala UI", 0, 13)); // NOI18N
@@ -199,6 +203,11 @@ public class User extends javax.swing.JFrame {
         SearchButton.setFont(new java.awt.Font("Eras Medium ITC", 0, 18)); // NOI18N
         SearchButton.setForeground(new java.awt.Color(227, 223, 197));
         SearchButton.setText("Search");
+        SearchButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                SearchButtonMousePressed(evt);
+            }
+        });
         SearchButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 SearchButtonActionPerformed(evt);
@@ -260,18 +269,18 @@ public class User extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(jPanel3Layout.createSequentialGroup()
-                                        .addComponent(IDField, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addGroup(jPanel3Layout.createSequentialGroup()
-                                                .addGap(138, 138, 138)
-                                                .addComponent(AutorLabel)
-                                                .addGap(47, 47, 47)
-                                                .addComponent(AutorField, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                .addComponent(IDField, javax.swing.GroupLayout.DEFAULT_SIZE, 151, Short.MAX_VALUE)
+                                                .addGap(125, 125, 125)
+                                                .addComponent(BookNameLabel))
                                             .addGroup(jPanel3Layout.createSequentialGroup()
-                                                .addGap(132, 132, 132)
-                                                .addComponent(BookNameLabel)
-                                                .addGap(18, 18, 18)
-                                                .addComponent(BookNameField, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                                .addGap(282, 282, 282)
+                                                .addComponent(AuthorLabel)))
+                                        .addGap(18, 18, 18)
+                                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                            .addComponent(AuthorField, javax.swing.GroupLayout.DEFAULT_SIZE, 137, Short.MAX_VALUE)
+                                            .addComponent(BookNameField)))
                                     .addComponent(CategoryBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addComponent(SectionHeader)
                             .addComponent(SectionScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 556, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -279,7 +288,7 @@ public class User extends javax.swing.JFrame {
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGap(258, 258, 258)
                         .addComponent(SearchButton)))
-                .addGap(0, 29, Short.MAX_VALUE))
+                .addGap(21, 21, 21))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -294,8 +303,8 @@ public class User extends javax.swing.JFrame {
                             .addComponent(BookNameField, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(AutorLabel)
-                            .addComponent(AutorField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(AuthorLabel)
+                            .addComponent(AuthorField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGap(15, 15, 15)
@@ -362,7 +371,7 @@ public class User extends javax.swing.JFrame {
         int index=SearchTable.getSelectedRow();
         TableModel model=SearchTable.getModel();
         
-        String id=(String) model.getValueAt(index, 0);
+        int id=(int) model.getValueAt(index, 0);
         String bookName=(String) model.getValueAt(index, 1);
         String category=(String) model.getValueAt(index, 2);
         String autor=(String) model.getValueAt(index, 3);
@@ -370,7 +379,19 @@ public class User extends javax.swing.JFrame {
         int response = JOptionPane.showConfirmDialog(this,"Are you sure you want to add to MS the book with parameters: \n ID: " + id + "\n Book name: " + bookName + "\n Category: " + category + "\n Autor: " + autor, "Confirmation of removal", JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE);
         
         if(response==JOptionPane.YES_OPTION){
-            //add
+            UserBookService userBookService = new UserBookService();
+            
+            int res = userBookService.addBookToUser(id, userId);
+            
+            if(res == 200) { //sucess
+                loadSectionTable();
+            }else if(res == 409) { //conflict
+                JOptionPane.showMessageDialog(null, "The book is already added!");
+                System.out.println("conflict");
+            }else { //error
+                System.out.println("error");
+            }
+            
         }
         else if(response==JOptionPane.NO_OPTION){
             System.out.println("Confirmation denied.");
@@ -384,7 +405,7 @@ public class User extends javax.swing.JFrame {
         int index=SectionTable.getSelectedRow();
         TableModel model=SectionTable.getModel();
         
-        String id=(String) model.getValueAt(index, 0);
+        int id=(int) model.getValueAt(index, 0);
         String bookName=(String) model.getValueAt(index, 1);
         String category=(String) model.getValueAt(index, 2);
         String autor=(String) model.getValueAt(index, 3);
@@ -392,17 +413,105 @@ public class User extends javax.swing.JFrame {
         String[] def={"Read","Remove from MS"};
         int response = JOptionPane.showOptionDialog(null,"What do you want to do with the book with parameters: \n ID: " + id + "\n Book name: " + bookName + "\n Category: " + category + "\n Autor: " + autor, "Confirmation of action", 0,JOptionPane.QUESTION_MESSAGE,null,def,"Read");
         
-        if(response==JOptionPane.YES_OPTION){
+        if(response==JOptionPane.YES_OPTION){ //read
             //read
         }
-        else if(response==JOptionPane.NO_OPTION){
-            //remove
+        else if(response==JOptionPane.NO_OPTION){ //remove
+            UserBookService userBookService = new UserBookService();
+            
+            boolean res = userBookService.removeBookFromUser(id, userId);
+            
+            if(res) {
+                JOptionPane.showMessageDialog(null, "success");
+                loadSectionTable();
+            }
         }
         else if(response==JOptionPane.CLOSED_OPTION){
             System.out.println("The confirmation form has been closed.");
         }
     }//GEN-LAST:event_SectionTableMouseClicked
 
+    private void SearchButtonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SearchButtonMousePressed
+        String idStr = IDField.getText();
+        String name = BookNameField.getText();
+        String category = CategoryBox.getSelectedItem().toString();
+        String author = AuthorField.getText();
+        
+        int id = idStr.isBlank() ? 0 : Integer.parseInt(idStr);
+        
+        Book book = new Book(id, "", name, category, author);
+        
+        loadSearchTable(book);
+    }//GEN-LAST:event_SearchButtonMousePressed
+    
+    private void loadSearchTable() {
+        BookService bookService = new BookService();
+        
+        ArrayList<Book> bookArr = bookService.getBooks();
+        
+        DefaultTableModel tableModel = new DefaultTableModel(new Object[]{"ID", "Book name", "Category", "Author"}, 0) {
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                // Make all cells uneditable
+                return false;
+            }
+        };
+        
+        tableModel.setRowCount(0);
+        
+        for(Book book : bookArr) {
+            Object[] rowData = {book.getId(), book.getName(), book.getCategory(), book.getAuthor()};
+            tableModel.addRow(rowData);
+        }
+        
+        SearchTable.setModel(tableModel);
+    }
+    
+    private void loadSearchTable(Book b) {
+        BookService bookService = new BookService();
+        
+        ArrayList<Book> bookArr = bookService.getBooks(b);
+        
+        DefaultTableModel tableModel = new DefaultTableModel(new Object[]{"ID", "Book name", "Category", "Author"}, 0) {
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                // Make all cells uneditable
+                return false;
+            }
+        };
+        
+        tableModel.setRowCount(0);
+        
+        for(Book book : bookArr) {
+            Object[] rowData = {book.getId(), book.getName(), book.getCategory(), book.getAuthor()};
+            tableModel.addRow(rowData);
+        }
+        
+        SearchTable.setModel(tableModel);
+    }
+    
+    private void loadSectionTable() {
+        UserBookService userBookSerive = new UserBookService();
+        
+        ArrayList<Book> bookArr = userBookSerive.getUserBooks(userId);
+        
+        DefaultTableModel tableModel = new DefaultTableModel(new Object[]{"ID", "Book name", "Category", "Author"}, 0) {
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                // Make all cells uneditable
+                return false;
+            }
+        };
+        
+        tableModel.setRowCount(0);
+        
+        for(Book book : bookArr) {
+            Object[] rowData = {book.getId(), book.getName(), book.getCategory(), book.getAuthor()};
+            tableModel.addRow(rowData);
+        }
+        
+        SectionTable.setModel(tableModel);
+    }
     /**
      * @param args the command line arguments
      */
@@ -440,8 +549,8 @@ public class User extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel AddBookLabel;
-    private javax.swing.JTextField AutorField;
-    private javax.swing.JLabel AutorLabel;
+    private javax.swing.JTextField AuthorField;
+    private javax.swing.JLabel AuthorLabel;
     private javax.swing.JTextField BookNameField;
     private javax.swing.JLabel BookNameLabel;
     private javax.swing.JComboBox<String> CategoryBox;
