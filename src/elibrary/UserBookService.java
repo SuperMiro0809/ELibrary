@@ -120,19 +120,16 @@ public class UserBookService {
             reader.close();
             writer.close();
 
-            //Delete the original file
+            //delete the original file
             if (inputFile.delete()) {
-                // Rename the temporary file to the original file name
+                // rename the temporary file to the original file name
                 if (tempFile.renameTo(inputFile)) {
-                    System.out.println("Line deleted successfully.");
-                    return true;
+                    return true; //success
                 } else {
-                    System.out.println("Failed to rename the temporary file.");
-                    return false;
+                    return false; //failed to rename the temporary file
                 }
             } else {
-                System.out.println("Failed to delete the original file.");
-                 return false;
+                return false; // failed to delete the original file
             }
         } catch (IOException e) {
             e.printStackTrace();

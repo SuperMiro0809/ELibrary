@@ -21,12 +21,21 @@ public class Admin extends javax.swing.JFrame {
     *@param user;
     */
     public Admin(UserState user) {
-        initComponents();
         if(user != null) {
+            initComponents();
+            
             AdminName.setText(user.getUsername());
-        }
+            
+            loadBooks();
+        }else {
+            JOptionPane.showMessageDialog(null, "Please login to visit this page.");
+            
+            Login object = new Login();
         
-        loadBooks();
+            object.setVisible(true);
+
+            dispose();
+        }
     }
 
     /**

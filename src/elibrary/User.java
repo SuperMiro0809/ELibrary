@@ -20,14 +20,23 @@ public class User extends javax.swing.JFrame {
     *@param user;
     */
     public User(UserState user) {
-        initComponents();
         if(user != null) {
+            initComponents();
+            
             UserName.setText(user.getUsername());
             userId = user.getId();
-        }
+            
+            loadSearchTable();
+            loadSectionTable();
+        }else {
+            JOptionPane.showMessageDialog(null, "Please login to visit this page.");
+            
+            Login object = new Login();
         
-        loadSearchTable();
-        loadSectionTable();
+            object.setVisible(true);
+
+            dispose();
+        }
     }
 
     /**
@@ -62,6 +71,7 @@ public class User extends javax.swing.JFrame {
         SearchButton = new javax.swing.JButton();
         SectionScrollPane1 = new javax.swing.JScrollPane();
         SearchTable = new javax.swing.JTable();
+        ResetButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -251,6 +261,21 @@ public class User extends javax.swing.JFrame {
         });
         SectionScrollPane1.setViewportView(SearchTable);
 
+        ResetButton.setBackground(new java.awt.Color(97, 95, 84));
+        ResetButton.setFont(new java.awt.Font("Eras Medium ITC", 0, 18)); // NOI18N
+        ResetButton.setForeground(new java.awt.Color(227, 223, 197));
+        ResetButton.setText("Reset");
+        ResetButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                ResetButtonMousePressed(evt);
+            }
+        });
+        ResetButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ResetButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -286,8 +311,11 @@ public class User extends javax.swing.JFrame {
                             .addComponent(SectionScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 556, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(ResultLabel)))
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(258, 258, 258)
-                        .addComponent(SearchButton)))
+                        .addGap(213, 213, 213)
+                        .addComponent(SearchButton)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(ResetButton)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addGap(21, 21, 21))
         );
         jPanel3Layout.setVerticalGroup(
@@ -316,7 +344,9 @@ public class User extends javax.swing.JFrame {
                             .addComponent(CategoryLabel)
                             .addComponent(CategoryBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 11, Short.MAX_VALUE)
-                        .addComponent(SearchButton)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(SearchButton)
+                            .addComponent(ResetButton))
                         .addGap(26, 26, 26)
                         .addComponent(ResultLabel)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
@@ -443,6 +473,21 @@ public class User extends javax.swing.JFrame {
         
         loadSearchTable(book);
     }//GEN-LAST:event_SearchButtonMousePressed
+
+    private void ResetButtonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ResetButtonMousePressed
+        // reset search form fields
+        IDField.setText("");
+        BookNameField.setText("");
+        CategoryBox.setSelectedIndex(0);
+        AuthorField.setText("");
+        
+        // load search table
+        loadSearchTable();
+    }//GEN-LAST:event_ResetButtonMousePressed
+
+    private void ResetButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ResetButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_ResetButtonActionPerformed
     
     private void loadSearchTable() {
         BookService bookService = new BookService();
@@ -559,6 +604,7 @@ public class User extends javax.swing.JFrame {
     private javax.swing.JTextField IDField;
     private javax.swing.JLabel IDLabel;
     private javax.swing.JLabel LogoLabel;
+    private javax.swing.JButton ResetButton;
     private javax.swing.JLabel ResultLabel;
     private javax.swing.JLabel RoleLabel;
     private javax.swing.JButton SearchButton;
