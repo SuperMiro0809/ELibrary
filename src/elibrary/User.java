@@ -4,9 +4,18 @@
  */
 package elibrary;
 
+import java.awt.Desktop;
+import java.net.MalformedURLException;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.net.URL;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumn;
+import javax.swing.table.TableColumnModel;
 import javax.swing.table.TableModel;
 
 /**
@@ -439,12 +448,19 @@ public class User extends javax.swing.JFrame {
         String bookName=(String) model.getValueAt(index, 1);
         String category=(String) model.getValueAt(index, 2);
         String autor=(String) model.getValueAt(index, 3);
-        
+        String urlStr = (String) model.getValueAt(index, 4);
+
         String[] def={"Read","Remove from MS"};
         int response = JOptionPane.showOptionDialog(null,"What do you want to do with the book with parameters: \n ID: " + id + "\n Book name: " + bookName + "\n Category: " + category + "\n Autor: " + autor, "Confirmation of action", 0,JOptionPane.QUESTION_MESSAGE,null,def,"Read");
         
-        if(response==JOptionPane.YES_OPTION){ //read
-            //read
+        if(response==JOptionPane.YES_OPTION){ // read
+            try {
+                URL url = new URL(urlStr);
+                openWebpage(url);
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+                JOptionPane.showMessageDialog(null, "URL is not valid");
+            }
         }
         else if(response==JOptionPane.NO_OPTION){ //remove
             UserBookService userBookService = new UserBookService();
@@ -540,7 +556,7 @@ public class User extends javax.swing.JFrame {
         
         ArrayList<Book> bookArr = userBookSerive.getUserBooks(userId);
         
-        DefaultTableModel tableModel = new DefaultTableModel(new Object[]{"ID", "Book name", "Category", "Author"}, 0) {
+        DefaultTableModel tableModel = new DefaultTableModel(new Object[]{"ID", "Book name", "Category", "Author", "URL"}, 0) {
             @Override
             public boolean isCellEditable(int row, int column) {
                 // Make all cells uneditable
@@ -551,11 +567,42 @@ public class User extends javax.swing.JFrame {
         tableModel.setRowCount(0);
         
         for(Book book : bookArr) {
-            Object[] rowData = {book.getId(), book.getName(), book.getCategory(), book.getAuthor()};
+            Object[] rowData = {book.getId(), book.getName(), book.getCategory(), book.getAuthor(), book.getUrl()};
             tableModel.addRow(rowData);
         }
         
         SectionTable.setModel(tableModel);
+        
+        
+        // hide url column
+        TableColumnModel columnModel = SectionTable.getColumnModel();
+        
+        TableColumn column = columnModel.getColumn(4);
+        
+        columnModel.removeColumn(column);
+    }
+    
+    public static boolean openWebpage(URI uri) {
+        Desktop desktop = Desktop.isDesktopSupported() ? Desktop.getDesktop() : null;
+        if (desktop != null && desktop.isSupported(Desktop.Action.BROWSE)) {
+            try {
+                desktop.browse(uri);
+                return true;
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return false;
+    }
+
+    public static boolean openWebpage(URL url) {
+        try {
+            return openWebpage(url.toURI());
+        } catch (URISyntaxException e) {
+            e.printStackTrace();
+        }
+        
+        return false;
     }
     /**
      * @param args the command line arguments
