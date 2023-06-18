@@ -6,6 +6,7 @@ package elibrary;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -106,8 +107,46 @@ public class BookService {
         }
     }
     
-    public void deleteBook() {
-        
+    public boolean deleteBook(int bookId) {
+        try {
+            File inputFile = new File(BOOKS_FILE);
+            File tempFile = new File("books_temp.txt");
+
+            BufferedReader reader = new BufferedReader(new FileReader(inputFile));
+            BufferedWriter writer = new BufferedWriter(new FileWriter(tempFile));
+
+            String currentLine;
+
+            while ((currentLine = reader.readLine()) != null) {
+                String[] parts = currentLine.split("<3");
+                
+                if(parts.length == 5) {
+                    if(Integer.parseInt(parts[0]) != bookId) {
+                        writer.write(currentLine);
+                        writer.newLine();
+                    }
+                }
+                
+            }
+
+            reader.close();
+            writer.close();
+
+            //delete the original file
+            if (inputFile.delete()) {
+                // rename the temporary file to the original file name
+                if (tempFile.renameTo(inputFile)) {
+                    return true; //success
+                } else {
+                    return false; //failed to rename the temporary file
+                }
+            } else {
+                return false; // failed to delete the original file
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+            return false;
+        }
     }
     
     private int getNextId() {

@@ -344,7 +344,14 @@ public class Admin extends javax.swing.JFrame {
         int response = JOptionPane.showConfirmDialog(this,"Are you sure you want to remove the book with parameters: \n ID: " + id + "\n Book name: " + bookName + "\n Category: " + category + "\n Autor: " + autor, "Confirmation of removal", JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE);
         
         if(response==JOptionPane.YES_OPTION){
-            //remove
+            BookService bookService = new BookService();
+            
+            boolean res = bookService.deleteBook(id);
+            
+            // load books on success
+            if(res) {
+                loadBooks();
+            }
         }
         else if(response==JOptionPane.NO_OPTION){
             System.out.println("Confirmation denied.");
